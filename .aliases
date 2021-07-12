@@ -1,0 +1,67 @@
+########
+# BASH #
+########
+
+# Alias to refresh bash
+alias bashrefresh=". ~/.zshrc";
+alias bashreactivate="deactivate && bashrefresh && activate";
+alias bashactivate="bashrefresh && activate";
+alias openbashprofile="vim ~/.zshrc";
+
+# LS Colors
+alias ls="ls -GFh";
+
+# Copy PWD to Clipboard
+alias cpwd="pwd | tr -d '\n' | pbcopy";
+
+# Alias to show/hide Files
+alias FINDER_PATH="/System/Library/CoreServices/Finder.app";
+alias showFiles="defaults write com.apple.finder AppleShowAllFiles YES; killall Finder ${FINDER_PATH}";
+alias hideFiles="defaults write com.apple.finder AppleShowAllFiles NO; killall Finder ${FINDER_PATH}";
+
+#######
+# Git #
+#######
+
+# Git aliases.
+alias gs='git status'
+alias gc='git commit'
+alias gp='git pull --rebase'
+alias gcam='git commit -am'
+alias gl='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
+
+##########
+# Python #
+##########
+
+# For virtualenv
+alias activate="source venv/bin/activate";
+
+#############
+# Terraform #
+#############
+
+alias tf="terraform";
+alias tf11="terraform11";
+alias tf12="terraform12";
+alias tf13="terraform13";
+alias tf14="terraform15";
+alias tf15="terraform15";
+
+###################
+# Xcode and Swift #
+###################
+
+# Xcode
+XCODE_PATH="~/Library/Developer/Xcode";
+alias purgeallbuilds="rm -rf ${XCODE_PATH}/DerivedData/*";
+alias purgeallarchives="rm -rf ${XCODE_PATH}/Archives/*";
+alias purgeallsnapshots="rm -rf ${XCODE_PATH}/Snapshots/*";
+alias purgealldevicelogs="rm -rf ${XCODE_PATH}/iOS Device Logs/*";
+alias purgeallthethings="purgeallbuilds && purgeallarchives && purgeallsnapshots && purgealldevicelogs";
+
+# Swift
+alias swiftclean="rm -rf .build; rm -rf Packages; rm -rf *.xcodeproj";
+alias swiftxcode="swift package generate-xcodeproj";
+alias swiftbuild="swiftclean && swift build && swiftxcode";
+alias swiftbuildclean="swift build && swiftxcode";

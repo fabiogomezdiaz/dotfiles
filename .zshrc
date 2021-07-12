@@ -1,25 +1,53 @@
 #
 # .zshrc
 #
-# @author Jeff Geerling
+# @author Fabio A. Gomez Diaz
 #
 
-# Colors.
-unset LSCOLORS
-export CLICOLOR=1
-export CLICOLOR_FORCE=1
+########
+# Path #
+########
 
-# Don't require escaping globbing characters in zsh.
-unsetopt nomatch
+# If you come from bash you might have to change your ${PATH}.
 
-# Nicer prompt.
-export PS1=$'\n'"%F{green} %*%F %3~ %F{white}"$'\n'"$ "
+export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:${HOME}/bin:~/.local/bin:${PATH}";
+export PATH="${HOME}/.fastlane/bin:${PATH}";
+export PATH="/usr/local/git/bin:${PATH}";
+export PATH="${HOME}/go/bin:${PATH}";
+export PATH="/opt/homebrew/bin:${PATH}";
+export PATH="${HOME}/.nvm:${PATH}";
+export PATH="/usr/local/opt/openssl/bin:${PATH}";
+export PATH="${HOME}/Library/Python/3.8/bin:$PATH";
+export PATH="${HOME}/.gem/ruby/3.0.0/bin:${PATH}";
+export PATH="${HOME}/.rvm/bin:${PATH}";
+export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:${PATH}";
+
+export ANDROID_HOME="${HOME}/Library/Android/sdk";
+export GOPATH="${HOME}/go";
+export SDKMAN_DIR="${HOME}/.sdkman";
+
+#######
+# Zsh #
+#######
+
+# TODO: Will need to automate installation of iTerm2, plugins, and all that
+
+# Path to your oh-my-zsh installation.
+export ZSH="/Users/${USER}/.oh-my-zsh";
+
+ZSH_THEME="agnoster"
+#ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # Enable plugins.
 plugins=(git brew history kubectl history-substring-search)
 
-# Custom $PATH with extra locations.
-export PATH=$HOME/Library/Python/3.8/bin:/opt/homebrew/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin:$HOME/go/bin:/usr/local/git/bin:$HOME/.composer/vendor/bin:$PATH
+source ${ZSH}/oh-my-zsh.sh;
+
+# Don't require escaping globbing characters in zsh.
+unsetopt nomatch;
+
+# Nicer prompt.
+#export PS1=$'\n'"%F{green} %*%F %3~ %F{white}"$'\n'"$ "
 
 # Bash-style time output.
 export TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S'
@@ -27,30 +55,69 @@ export TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S'
 # Include alias file (if present) containing aliases for ssh, etc.
 if [ -f ~/.aliases ]
 then
-  source ~/.aliases
+  source ~/.aliases;
+  echo "Loaded aliases";
 fi
 
-# Set architecture-specific brew share path.
-arch_name="$(uname -m)"
-if [ "${arch_name}" = "x86_64" ]; then
-    share_path="/usr/local/share"
-elif [ "${arch_name}" = "arm64" ]; then
-    share_path="/opt/homebrew/share"
-else
-    echo "Unknown architecture: ${arch_name}"
-fi
+########
+# Brew #
+########
 
-# Allow history search via up/down keys.
-source ${share_path}/zsh-history-substring-search/zsh-history-substring-search.zsh
-bindkey "^[[A" history-substring-search-up
-bindkey "^[[B" history-substring-search-down
+# Tell homebrew to not autoupdate every single time I run it (just once a week).
+export HOMEBREW_AUTO_UPDATE_SECS="604800";
 
-# Git aliases.
-alias gs='git status'
-alias gc='git commit'
-alias gp='git pull --rebase'
-alias gcam='git commit -am'
-alias gl='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
+##########
+# Colors #
+##########
+
+# LS Colors
+export CLICOLOR="1";
+export CLICOLOR_FORCE="1";
+export LSCOLORS="ExFxBxDxCxegedabagacad";
+
+##########
+# DOCKER #
+##########
+
+# Super useful Docker container oneshots.
+# Usage: dockrun, or dockrun [centos7|fedora27|debian9|debian8|ubuntu1404|etc.]
+function dockrun() {
+  docker run -it geerlingguy/docker-"${1:-ubuntu1604}"-ansible /bin/bash;
+}
+
+# Enter a running Docker container.
+function denter() {
+  if [[ ! "$1" ]] ; then
+    echo "You must supply a container ID or name."
+    return 0
+  fi
+
+  docker exec -it $1 bash
+  return 0
+}
+
+#######
+# Git #
+#######
+
+function gitrebase() {
+  BRANCH="$1";
+
+  if [[ "$BRANCH" == "" ]]; then
+    BRANCH="master";
+  fi
+
+  REMOTE="$2";
+
+  if [[ "$REMOTE" == "" ]]; then
+    REMOTE="origin";
+  fi
+
+  git stash;
+  git fetch "${REMOTE}";
+  git rebase "${REMOTE}/${BRANCH}";
+  git stash pop;
+}
 
 # Completions.
 autoload -Uz compinit && compinit
@@ -60,68 +127,58 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}
 # Git upstream branch syncer.
 # Usage: gsync master (checks out master, pull upstream, push origin).
 function gsync() {
- if [[ ! "$1" ]] ; then
-     echo "You must supply a branch."
-     return 0
- fi
+  if [[ ! "$1" ]] ; then
+    echo "You must supply a branch."
+    return 0
+  fi
 
- BRANCHES=$(git branch --list $1)
- if [ ! "$BRANCHES" ] ; then
+  BRANCHES=$(git branch --list $1)
+  if [ ! "$BRANCHES" ] ; then
     echo "Branch $1 does not exist."
     return 0
- fi
+  fi
 
- git checkout "$1" && \
- git pull upstream "$1" && \
- git push origin "$1"
+  git checkout "$1" && \
+  git pull upstream "$1" && \
+  git push origin "$1"
 }
 
-# Tell homebrew to not autoupdate every single time I run it (just once a week).
-export HOMEBREW_AUTO_UPDATE_SECS=604800
+################
+# Google Cloud #
+################
 
-# Super useful Docker container oneshots.
-# Usage: dockrun, or dockrun [centos7|fedora27|debian9|debian8|ubuntu1404|etc.]
-dockrun() {
- docker run -it geerlingguy/docker-"${1:-ubuntu1604}"-ansible /bin/bash
-}
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f "${HOME}/Downloads/google-cloud-sdk/path.zsh.inc" ]; then . "${HOME}/Downloads/google-cloud-sdk/path.zsh.inc"; fi
 
-# Enter a running Docker container.
-function denter() {
- if [[ ! "$1" ]] ; then
-     echo "You must supply a container ID or name."
-     return 0
- fi
+# The next line enables shell command completion for gcloud.
+if [ -f "${HOME}/Downloads/google-cloud-sdk/completion.zsh.inc" ]; then . "${HOME}/Downloads/google-cloud-sdk/completion.zsh.inc"; fi
 
- docker exec -it $1 bash
- return 0
-}
+########
+# JAVA #
+########
 
-# Delete a given line number in the known_hosts file.
-knownrm() {
- re='^[0-9]+$'
- if ! [[ $1 =~ $re ]] ; then
-   echo "error: line number missing" >&2;
- else
-   sed -i '' "$1d" ~/.ssh/known_hosts
- fi
-}
+[[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh";
 
-# Allow Composer to use almost as much RAM as Chrome.
-export COMPOSER_MEMORY_LIMIT=-1
+###########
+# Node.js #
+###########
 
-# Ask for confirmation when 'prod' is in a command string.
-#prod_command_trap () {
-#  if [[ $BASH_COMMAND == *prod* ]]
-#  then
-#    read -p "Are you sure you want to run this command on prod [Y/n]? " -n 1 -r
-#    if [[ $REPLY =~ ^[Yy]$ ]]
-#    then
-#      echo -e "\nRunning command \"$BASH_COMMAND\" \n"
-#    else
-#      echo -e "\nCommand was not run.\n"
-#      return 1
-#    fi
-#  fi
-#}
-#shopt -s extdebug
-#trap prod_command_trap DEBUG
+# Node Version Manager (NVM)
+# This loads nvm
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh";
+
+# This loads nvm bash_completion
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm";
+
+########################
+# Ruby or RVM or rbenv #
+########################
+
+#source ~/.profile
+export SDKROOT=$(xcrun --show-sdk-path);
+
+# Load RVM into a shell session *as a function*
+[[ -s "${HOME}/.rvm/scripts/rvm" ]] && source "${HOME}/.rvm/scripts/rvm";
+
+# For rbenv
+eval "$(rbenv init -)";
