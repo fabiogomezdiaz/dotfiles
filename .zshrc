@@ -15,6 +15,7 @@ export PATH="${HOME}/.fastlane/bin:${PATH}";
 export PATH="/usr/local/git/bin:${PATH}";
 export PATH="${HOME}/go/bin:${PATH}";
 export PATH="/opt/homebrew/bin:${PATH}";
+export PATH="//usr/local/Caskroom:${PATH}";
 export PATH="${HOME}/.nvm:${PATH}";
 export PATH="/usr/local/opt/openssl/bin:${PATH}";
 export PATH="${HOME}/Library/Python/3.8/bin:$PATH";
@@ -147,8 +148,8 @@ function gsync() {
 # Google Cloud #
 ################
 
-source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
 
 # The next line updates PATH for the Google Cloud SDK.
 #if [ -f "${HOME}/Downloads/google-cloud-sdk/path.zsh.inc" ]; then . "${HOME}/Downloads/google-cloud-sdk/path.zsh.inc"; fi
