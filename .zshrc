@@ -57,7 +57,6 @@ export TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S'
 if [ -f ~/.aliases ]
 then
   source ~/.aliases;
-  echo "Loaded aliases";
 fi
 
 ########
