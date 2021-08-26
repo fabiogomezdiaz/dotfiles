@@ -179,3 +179,10 @@ export SDKROOT=$(xcrun --show-sdk-path);
 
 # For rbenv
 eval "$(rbenv init -)";
+
+
+#####################
+# Homelab Terraform #
+#####################
+export GOOGLE_APPLICATION_CREDENTIALS=~/.google/fabiogomezdiaz-home-lab.json
+source ~/Documents/code/homelab/kube-cluster/env/values.env
