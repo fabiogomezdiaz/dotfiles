@@ -184,5 +184,7 @@ eval "$(rbenv init -)";
 #####################
 # Homelab Terraform #
 #####################
-export GOOGLE_APPLICATION_CREDENTIALS=~/.google/fabiogomezdiaz-home-lab.json
-source ~/Documents/code/homelab/kube-cluster/env/values.env
+
+if [[ "${HOST}" == "Fabios-MacBook-Pro.local" || "${HOST}" == "macmini.fabiongo.com" ]]; then
+  source ~/Documents/code/homelab/kube-cluster/env/values.env;
+fi
