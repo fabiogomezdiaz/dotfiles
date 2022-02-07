@@ -8,23 +8,29 @@
 # Path #
 ########
 
+
 # If you come from bash you might have to change your ${PATH}.
 
+export ANDROID_HOME="${HOME}/Library/Android/sdk";
+if [[ $(uname -p) == 'arm' ]]; then
+  HOMEBREW="/opt/homebrew";
+else
+  HOMEBREW="/usr/local";
+fi
+CASKROOM="${HOMEBREW}/Caskroom";
+export GOPATH="${HOME}/go";
 export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:${HOME}/bin:~/.local/bin:${PATH}";
 export PATH="${HOME}/.fastlane/bin:${PATH}";
 export PATH="/usr/local/git/bin:${PATH}";
 export PATH="${HOME}/go/bin:${PATH}";
-export PATH="/opt/homebrew/bin:${PATH}";
-export PATH="//usr/local/Caskroom:${PATH}";
+export PATH="${HOMEBREW}/bin:${PATH}";
+export PATH="${CASKROOM}:${PATH}";
 export PATH="${HOME}/.nvm:${PATH}";
 export PATH="/usr/local/opt/openssl/bin:${PATH}";
 export PATH="${HOME}/Library/Python/3.8/bin:$PATH";
 export PATH="${HOME}/.gem/ruby/3.0.0/bin:${PATH}";
 export PATH="${HOME}/.rvm/bin:${PATH}";
 export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:${PATH}";
-
-export ANDROID_HOME="${HOME}/Library/Android/sdk";
-export GOPATH="${HOME}/go";
 export SDKMAN_DIR="${HOME}/.sdkman";
 
 #######
@@ -146,7 +152,6 @@ function gsync() {
 ################
 # Google Cloud #
 ################
-CASKROOM="/usr/local/Caskroom";
 source "${CASKROOM}/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
 source "${CASKROOM}/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
 
@@ -162,10 +167,11 @@ source "${CASKROOM}/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
 
 # Node Version Manager (NVM)
 # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh";
+NVM="${HOMEBREW}/opt/nvm";
+[ -s "${NVM}/nvm.sh" ] && . "${NVM}/nvm.sh";
 
 # This loads nvm bash_completion
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm";
+[ -s "${NVM}/etc/bash_completion.d/nvm" ] && . "${NVM}/etc/bash_completion.d/nvm";
 
 ########################
 # Ruby or RVM or rbenv #
@@ -179,7 +185,6 @@ export SDKROOT=$(xcrun --show-sdk-path);
 
 # For rbenv
 eval "$(rbenv init -)";
-
 
 #####################
 # Homelab Terraform #
