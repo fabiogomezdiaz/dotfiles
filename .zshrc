@@ -191,5 +191,5 @@ eval "$(rbenv init -)";
 #####################
 
 if [[ "${HOST}" == "Fabios-MacBook-Pro.local" || "${HOST}" == "macmini.fabiongo.com" ]]; then
-  source ~/Documents/code/homelab/kube-cluster/env/values.env;
+  source ~/code/homelab/kube-cluster/env/values.env;
 fi
