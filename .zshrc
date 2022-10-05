@@ -181,10 +181,10 @@ NVM="${HOMEBREW}/opt/nvm";
 export SDKROOT=$(xcrun --show-sdk-path);
 
 # Load RVM into a shell session *as a function*
-[[ -s "${HOME}/.rvm/scripts/rvm" ]] && source "${HOME}/.rvm/scripts/rvm";
+#[[ -s "${HOME}/.rvm/scripts/rvm" ]] && source "${HOME}/.rvm/scripts/rvm";
 
 # For rbenv
-eval "$(rbenv init -)";
+#eval "$(rbenv init -)";
 
 #####################
 # Homelab Terraform #
