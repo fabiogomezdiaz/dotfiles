@@ -70,3 +70,8 @@ alias swiftbuildclean="swift build && swiftxcode";
 # Docker #
 ##########
 command -v docker >/dev/null 2>&1 || alias docker=podman
+
+##########
+# Python #
+##########
+alias python=python3
