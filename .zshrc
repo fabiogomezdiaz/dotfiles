@@ -30,6 +30,7 @@ export PATH="/usr/local/opt/openssl/bin:${PATH}";
 export PATH="${HOME}/Library/Python/3.8/bin:$PATH";
 export PATH="${HOME}/.gem/ruby/3.0.0/bin:${PATH}";
 export PATH="${HOME}/.rvm/bin:${PATH}";
+export PATH="/usr/local/share/dotnet:$PATH"
 export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:${PATH}";
 export SDKMAN_DIR="${HOME}/.sdkman";
 
