@@ -192,6 +192,6 @@ export SDKROOT=$(xcrun --show-sdk-path);
 # Homelab Terraform #
 #####################
 
-if [[ "${HOST}" == "Fabios-MacBook-Pro.local" || "${HOST}" == "macmini.fabiongo.com" ]]; then
+if [[ "${HOST}" == "mbpmax.local" || "${HOST}" == "macmini.fabiongo.com" ]]; then
   source ~/code/homelab/kube-cluster/env/values.env;
 fi
