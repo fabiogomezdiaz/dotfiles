@@ -193,5 +193,5 @@ export SDKROOT=$(xcrun --show-sdk-path);
 #####################
 
 if [[ "${HOST}" == "mbpmax.local" || "${HOST}" == "macmini.fabiongo.com" ]]; then
-  source ~/code/homelab/kube-cluster/env/values.env;
+  source ~/code/homelab/homelab/env/values.env;
 fi
