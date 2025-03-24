@@ -75,3 +75,9 @@ command -v docker >/dev/null 2>&1 || { command -v podman >/dev/null 2>&1 && alia
 # Python #
 ##########
 alias python=python3
+
+###########
+# ESP-IDF #
+###########
+
+alias get_idf='. $HOME/esp/esp-idf/export.sh'
