@@ -80,3 +80,8 @@ alias python=python3
 # ESP-IDF #
 ###########
 alias idf='. $HOME/esp/esp-idf/export.sh'
+
+#######
+# DNS #
+#######
+alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder && echo "DNS cache flushed!"'
