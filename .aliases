@@ -79,7 +79,8 @@ alias python=python3
 ###########
 # ESP-IDF #
 ###########
-alias idf='. $HOME/esp/esp-idf/export.sh'
+alias getidf='. $HOME/esp/esp-idf/export.sh'
+alias idf='idf.py'
 
 #######
 # DNS #
