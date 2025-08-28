@@ -186,7 +186,7 @@ export SDKROOT=$(xcrun --show-sdk-path);
 #[[ -s "${HOME}/.rvm/scripts/rvm" ]] && source "${HOME}/.rvm/scripts/rvm";
 
 # For rbenv
-#eval "$(rbenv init -)";
+eval "$(rbenv init -)";
 
 #####################
 # Homelab Terraform #
