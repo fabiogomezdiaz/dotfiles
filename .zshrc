@@ -195,3 +195,7 @@ eval "$(rbenv init -)";
 if [[ "${HOST}" == "mbpmax.local" || "${HOST}" == "macmini.fabiongo.com" ]]; then
   source ~/code/homelab/homelab/env/values.env;
 fi
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/fabiogomezdiaz/.lmstudio/bin"
+# End of LM Studio CLI section
