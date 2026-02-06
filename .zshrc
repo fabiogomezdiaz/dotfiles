@@ -154,8 +154,16 @@ function gsync() {
 ################
 # Google Cloud #
 ################
-source "${CASKROOM}/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-source "${CASKROOM}/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+
+GCLOUD_SDK_PATH="${CASKROOM}/google-cloud-sdk/latest/google-cloud-sdk"
+
+if [[ -f "${GCLOUD_SDK_PATH}/path.zsh.inc" ]]; then
+  source "${GCLOUD_SDK_PATH}/path.zsh.inc"
+fi
+
+if [[ -f "${GCLOUD_SDK_PATH}/completion.zsh.inc" ]]; then
+  source "${GCLOUD_SDK_PATH}/completion.zsh.inc"
+fi
 
 ########
 # JAVA #
