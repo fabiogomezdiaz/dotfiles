@@ -193,8 +193,11 @@ export SDKROOT=$(xcrun --show-sdk-path);
 # Load RVM into a shell session *as a function*
 #[[ -s "${HOME}/.rvm/scripts/rvm" ]] && source "${HOME}/.rvm/scripts/rvm";
 
-# For rbenv
-eval "$(rbenv init -)";
+# rbenv initialization (only if installed)
+if command -v rbenv >/dev/null 2>&1; then
+  export RBENV_ROOT="$HOME/.rbenv"
+  eval "$(rbenv init -s)"
+fi
 
 #####################
 # Homelab Terraform #
