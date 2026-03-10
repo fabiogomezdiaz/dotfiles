@@ -33,6 +33,7 @@ export PATH="${HOME}/.rvm/bin:${PATH}";
 export PATH="/usr/local/share/dotnet:$PATH"
 export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:${PATH}";
 export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+export PATH="${HOME}/.local/bin"
 export SDKMAN_DIR="${HOME}/.sdkman";
 
 #######
@@ -208,5 +209,5 @@ if [[ "${HOST}" == "mbpmax.local" || "${HOST}" == "macmini.fabiongo.com" ]]; the
 fi
 
 # Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/fabiogomezdiaz/.lmstudio/bin"
+export ="$:/Users/fabiogomezdiaz/.lmstudio/bin"
 # End of LM Studio CLI section
