@@ -197,7 +197,7 @@ export SDKROOT=$(xcrun --show-sdk-path);
 # rbenv initialization (only if installed)
 if command -v rbenv >/dev/null 2>&1; then
   export RBENV_ROOT="$HOME/.rbenv"
-  eval "$(rbenv init -s)"
+  eval "$(rbenv init -)"
 fi
 
 #####################
