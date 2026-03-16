@@ -209,5 +209,5 @@ if [[ "${HOST}" == "mbpmax.local" || "${HOST}" == "macmini.fabiongo.com" ]]; the
 fi
 
 # Added by LM Studio CLI (lms)
-export ="$:/Users/fabiogomezdiaz/.lmstudio/bin"
+export="$:/Users/fabiogomezdiaz/.lmstudio/bin"
 # End of LM Studio CLI section
